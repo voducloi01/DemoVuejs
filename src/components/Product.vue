@@ -1,36 +1,21 @@
 <template>
-    <div class="wrapper">
-    
-        <div class="container">
-    
-            <div class="row g-1">
-    
-                <div class="col-md-3" v-for="products in Propduct" :key="products.id">
-    
-                    <div class="card p-4" >
-    
-                        <div class="text-center">
-    
-                            <img :src="products.image" width="200"  height="140px">
-    
-                        </div>
-    
-                        <div class="product-details">
-    
-                            <span class="font-weight-bold d-block">{{products.price}}</span>
-    
-                            <span>{{products.product}}</span>
-    
-                            <div class="buttons d-flex flex-row">
-    
-                                <div class="cart"><i class="fa fa-shopping-cart"></i>
-    
-                                </div> <button class="btn btn-success cart-button btn-block">
-    
-                                        <span class="dot">1</span>Add to cart </button>
-    
-                            </div>
-    
+    <div class="wrapper">    
+        <div class="container">    
+            <div class="row g-1">   
+                <div class="col-md-3" v-for=" ( products,index) in ListProduct" :key="index">   
+                    <div class="card p-4" >   
+                        <div class="text-center">  
+                            <img :src="products.image" width="200"  height="140px">  
+                        </div>   
+                        <div class="product-details"> 
+                            <span class="font-weight-bold d-block">{{products.price}}</span>    
+                            <span>{{products.product}}</span>   
+                            <div class="buttons d-flex flex-row">   
+                                <div class="cart">                                       
+                                </div> <button class="btn btn-success" @click="e => storeUpdate.handleId(products.id)">  Edit</button>   
+                                       
+                            </div>   
+
                         </div>
     
                     </div>
@@ -40,24 +25,18 @@
             </div>
     
         </div>
-    
     </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import {useUpdate} from '../store/useUpdate'
 export default {
     name: 'VueBootstrapProduct',
+    props : ['ListProduct'] ,
     setup() {
-
-        const Propduct = ref([
-        { id: 1, product: "LapTop MacBook", price: 100 ,image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzZHli-QLtw3UamhiDq4H9o4fuIHd9rcgA-w&usqp=CAU"}, 
-        { id: 2, product: "LapTop Asus", price: 300,image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ16rrJ2XljHQFvcI3wCJehmex248cfHTrfYw&usqp=CAU" }, 
-        { id: 3, product: "LapTop Dell", price: 400 ,image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI3bLKfrXKuhnU9bBQeiS0RJuWnkEt3xG6ZA&usqp=CAU" }
-    ])   
-        
-         return {Propduct}
-  }
+        const storeUpdate  = useUpdate() ;
+        return {storeUpdate}   
+    }
 };
 </script>
 

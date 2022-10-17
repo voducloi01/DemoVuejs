@@ -1,7 +1,8 @@
 <template>
    <div>
       <Header /> 
-      <Product />
+      <Product :ListProduct="ListProduct"/>    
+      <InsertProduct :ListProduct="ListProduct"/>
    </div>
 </template>
 
@@ -9,9 +10,19 @@
 import Header from './components/Header.vue';
 import Product from './components/Product.vue';
 
+import InsertProduct from './components/InsertProduct.vue';
+import {useData} from './store/useData'
+
 export default {
     name: "App",
-    components: { Header, Product }
+
+    components: { Header, Product, InsertProduct } ,
+    setup() {
+         const store = useData() ;
+         const ListProduct = store.ListProduct
+          return { ListProduct}
+    } 
+
 }
 </script>
 
