@@ -11,7 +11,16 @@ import Product from './components/Product.vue';
 
 export default {
     name: "App",
+<<<<<<< Updated upstream
     components: { Header, Product }
+=======
+    components: { Header, Product, InsertProduct } ,
+    setup() {
+         const store = useData() ;
+         const ListProduct = store.ListProduct
+          return { ListProduct}
+    } 
+>>>>>>> Stashed changes
 }
 </script>
 
