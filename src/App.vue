@@ -15,26 +15,14 @@ import {useData} from './store/useData'
 
 export default {
     name: "App",
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    components: { Header, Product }
-=======
+
     components: { Header, Product, InsertProduct } ,
     setup() {
          const store = useData() ;
          const ListProduct = store.ListProduct
           return { ListProduct}
     } 
->>>>>>> Stashed changes
-=======
-    components: { Header, Product, InsertProduct } ,
-    setup() {
-         const store = useData() ;
-         console.log(store);
-         const ListProduct = store.ListProduct
-          return { ListProduct}
-    } 
->>>>>>> develop1
+
 }
 </script>
 

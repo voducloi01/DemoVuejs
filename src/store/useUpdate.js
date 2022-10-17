@@ -10,25 +10,27 @@ export const useUpdate = defineStore("useUpdate", () => {
 		const ListProduct = dataStore.ListProduct;
 		const idProduct = ListProduct.findIndex((e) => e.id === id);
 		const valueProduct = ListProduct[idProduct];
-		StoreInsert.changeId = valueProduct.id;
-		StoreInsert.changeName = valueProduct.product;
-		StoreInsert.changePrice = valueProduct.price;
-		StoreInsert.changeImage = valueProduct.image;
+
+		StoreInsert.product.id = valueProduct.id;
+		StoreInsert.product.product = valueProduct.product;
+		StoreInsert.product.price = valueProduct.price;
+		StoreInsert.product.image = valueProduct.image;
 		status.value = false;
 	};
 
 	const handleUpdate = () => {
 		const ListProduct = [...dataStore.ListProduct];
-		const index = ListProduct.findIndex((e) => e.id === StoreInsert.changeId);
-		ListProduct[index].product = StoreInsert.changeName;
-		ListProduct[index].price = StoreInsert.changePrice;
-		ListProduct[index].image = StoreInsert.changeImage;
+		const index = ListProduct.findIndex((e) => e.id === StoreInsert.product.id);
 
-		StoreInsert.changeId = "";
-		StoreInsert.changeName = "";
-		StoreInsert.changePrice = "";
-		StoreInsert.changeImage = "";
+		ListProduct[index].product = StoreInsert.product.product;
+		ListProduct[index].price = StoreInsert.product.price;
+		ListProduct[index].image = StoreInsert.product.image;
 		status.value = true;
+
+		StoreInsert.product.id = "";
+		StoreInsert.product.product = "";
+		StoreInsert.product.price = "";
+		StoreInsert.product.image = "";
 	};
 
 	return { handleId, status, handleUpdate };

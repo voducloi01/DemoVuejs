@@ -1,20 +1,26 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 import { useData } from "../store/useData";
 export const useInsert = defineStore("useInsert", () => {
 	const storeData = useData();
 	const ListProducts = storeData.ListProduct;
-	const changeId = ref("");
-	const changeName = ref("");
-	const changePrice = ref("");
-	const changeImage = ref("");
-	const handleinsert = () => {
-		ListProducts.push({
-			id: changeId,
-			product: changeName,
-			price: changePrice,
-			image: changeImage,
-		});
+
+	const product = {
+		id: "",
+		product: "",
+		price: "",
+		image: "",
 	};
-	return { changeId, changeName, changePrice, changeImage, handleinsert };
+	const handleinsert = (product) => {
+		ListProducts.push({
+			id: product.id,
+			product: product.product,
+			price: product.price,
+			image: product.image,
+		});
+		product.id = "";
+		product.product = "";
+		product.price = "";
+		product.image = "";
+	};
+	return { handleinsert, product };
 });

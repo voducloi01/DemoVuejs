@@ -1,39 +1,4 @@
 <template>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    <div class="wrapper">
-    
-        <div class="container">
-    
-            <div class="row g-1">
-    
-                <div class="col-md-3" v-for="products in Propduct" :key="products.id">
-    
-                    <div class="card p-4" >
-    
-                        <div class="text-center">
-    
-                            <img :src="products.image" width="200"  height="140px">
-    
-                        </div>
-    
-                        <div class="product-details">
-    
-                            <span class="font-weight-bold d-block">{{products.price}}</span>
-    
-                            <span>{{products.product}}</span>
-    
-                            <div class="buttons d-flex flex-row">
-    
-                                <div class="cart"><i class="fa fa-shopping-cart"></i>
-    
-                                </div> <button class="btn btn-success cart-button btn-block">
-    
-                                        <span class="dot">1</span>Add to cart </button>
-    
-                            </div>
-    
-=======
     <div class="wrapper">    
         <div class="container">    
             <div class="row g-1">   
@@ -50,7 +15,7 @@
                                 </div> <button class="btn btn-success" @click="e => storeUpdate.handleId(products.id)">  Edit</button>   
                                        
                             </div>   
->>>>>>> Stashed changes
+
                         </div>
     
                     </div>
@@ -60,63 +25,17 @@
             </div>
     
         </div>
-    
-=======
-    <div class="wrapper">    
-        <div class="container">    
-            <div class="row g-1">   
-                <div class="col-md-3" v-for="products in ListProduct" :key="products.id">   
-                    <div class="card p-4" >   
-                        <div class="text-center">  
-                            <img :src="products.image" width="200"  height="140px">  
-                        </div>   
-                        <div class="product-details"> 
-                            <span class="font-weight-bold d-block">{{products.price}}</span>    
-                            <span>{{products.product}}</span>   
-                            <div class="buttons d-flex flex-row">   
-                                <div class="cart">                                       
-                                </div> <button class="btn btn-success" @click="e => handleId(products.id)">  Edit</button>   
-                                       
-                            </div>   
-                        </div>
-    
-                    </div>    
-                </div>    
-            </div>    
-        </div>   
->>>>>>> develop1
     </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-import { ref } from 'vue'
-=======
-//import { ref } from 'vue'
 import {useUpdate} from '../store/useUpdate'
-
->>>>>>> Stashed changes
-=======
-//import { ref } from 'vue'
->>>>>>> develop1
 export default {
     name: 'VueBootstrapProduct',
     props : ['ListProduct'] ,
     setup() {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
         const storeUpdate  = useUpdate() ;
-        return {storeUpdate}
->>>>>>> Stashed changes
-=======
-        const handleId = (e) =>{
-            console.log(e);
-        }
-        return {handleId}
->>>>>>> develop1
-
+        return {storeUpdate}   
     }
 };
 </script>
