@@ -1,7 +1,8 @@
 <template>
    <div>
       <Header /> 
-      <Product />
+      <Product :ListProduct="ListProduct"/>    
+      <InsertProduct :ListProduct="ListProduct"/>
    </div>
 </template>
 
@@ -9,8 +10,12 @@
 import Header from './components/Header.vue';
 import Product from './components/Product.vue';
 
+import InsertProduct from './components/InsertProduct.vue';
+import {useData} from './store/useData'
+
 export default {
     name: "App",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     components: { Header, Product }
 =======
@@ -21,6 +26,15 @@ export default {
           return { ListProduct}
     } 
 >>>>>>> Stashed changes
+=======
+    components: { Header, Product, InsertProduct } ,
+    setup() {
+         const store = useData() ;
+         console.log(store);
+         const ListProduct = store.ListProduct
+          return { ListProduct}
+    } 
+>>>>>>> develop1
 }
 </script>
 
