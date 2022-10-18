@@ -1,51 +1,37 @@
 <template>
-    
-    <div class="wrapper">    
-     
-        <div  class="container">    
+   
+        <div class="container">    
+            
+            <h3>Sản Phẩm Tìm Kiếm</h3>
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( products,index) in dataProduct.ListProduct" :key="index">   
+                <div class="col-md-3" v-for=" ( products,index) in storeSearch.searchProduct" :key="index">   
                     <div class="card p-4" >   
                         <div class="text-center">  
                             <img :src="products.image" width="200"  height="140px">  
-                        </div>   
+                        </div>
+
                         <div class="product-details"> 
                             <span class="font-weight-bold d-block">{{products.price}}</span>    
                             <span>{{products.product}}</span>   
-                            <div class="buttons d-flex flex-row">   
-                                <div class="cart">                                       
-                                </div> <button class="btn btn-success" @click="e => storeUpdate.handleId(products.id)">  Edit</button>   
-                                       
-                            </div>   
-
-                        </div>
-    
-                    </div>
-    
-                </div>
-    
-            </div>
-    
+                        </div>  
+                    </div>   
+                </div>    
+            </div>   
         </div>
-        <InsertProduct />
-    </div>
-   
+
 </template>
 
 <script>
-import {useUpdate} from '../store/useUpdate'
-import {useData} from '../store/useData'
-import {ref} from 'vue'
-import InsertProduct from './InsertProduct.vue';
+
+import {useSearch} from '../store/useSearch'
 export default {
-    name: "VueBootstrapProduct",
+    name: 'VueBootstrapProduct',
+    props : ['ListProduct'] ,
     setup() {
-        const isShow = ref(true);
-        const storeUpdate = useUpdate();
-        const dataProduct = useData();
-        return { storeUpdate, isShow, dataProduct };
-    },
-    components: { InsertProduct }
+      
+        const storeSearch = useSearch()
+        return { storeSearch}   
+    }
 };
 </script>
 

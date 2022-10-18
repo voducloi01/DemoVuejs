@@ -1,22 +1,29 @@
 <template>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">                    
+    <div class="collapse navbar-collapse custom__search" id="navbarSupportedContent"  >                    
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+            <h4> {{search.searchText}}</h4>
+          <input v-model="search.searchText" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button  class="btn btn-outline-success">Search</button>
         </form>
     </div>
 </template>
 
 <script>
+
+import {useSearch} from '../store/useSearch'
+
 export default {
     name: 'VueBootstrapSearch',
 
     setup() {
-        
+        const search = useSearch() ;
+        return { search}
     }
 };
 </script>
 
 <style>
-
+.custom__search{
+    justify-content: center
+}
 </style>

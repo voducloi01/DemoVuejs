@@ -1,17 +1,25 @@
 <template>
-   <div>
-      <Header /> 
-      <Product />
-   </div>
+
+      <div> <Header/>     
+            <router-view>
+                  <ProductSearch />                                                              
+                  <Product />                            
+            </router-view>    
+                          
+                               
+      </div>
+
+
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Product from './components/Product.vue';
+import ProductSearch from './components/ProductSearch.vue';
 
 export default {
     name: "App",
-    components: { Header, Product }
+   components: { Header, Product, ProductSearch } ,
 }
 </script>
 
