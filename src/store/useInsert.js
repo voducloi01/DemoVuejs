@@ -22,5 +22,7 @@ export const useInsert = defineStore("useInsert", () => {
 		product.price = "";
 		product.image = "";
 	};
-	return { handleinsert, product };
+
+	const productCopy = [...ListProducts];
+	return { handleinsert, product, productCopy };
 });

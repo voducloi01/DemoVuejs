@@ -1,28 +1,25 @@
 <template>
-   <div>
-      <Header /> 
-      <Product :ListProduct="ListProduct"/>    
-      <InsertProduct :ListProduct="ListProduct"/>
-   </div>
+
+      <div> <Header/>     
+            <router-view>
+                  <ProductSearch />                                                              
+                  <Product />                            
+            </router-view>    
+                          
+                               
+      </div>
+
+
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Product from './components/Product.vue';
-
-import InsertProduct from './components/InsertProduct.vue';
-import {useData} from './store/useData'
+import ProductSearch from './components/ProductSearch.vue';
 
 export default {
     name: "App",
-
-    components: { Header, Product, InsertProduct } ,
-    setup() {
-         const store = useData() ;
-         const ListProduct = store.ListProduct
-          return { ListProduct}
-    } 
-
+   components: { Header, Product, ProductSearch } ,
 }
 </script>
 
