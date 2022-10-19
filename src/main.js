@@ -3,6 +3,10 @@ import { createPinia, PiniaVuePlugin } from "pinia";
 Vue.use(PiniaVuePlugin);
 const pinia = createPinia();
 //
+//axios
+import axios from "axios";
+
+Vue.prototype.$http = axios;
 
 import VueRouter from "vue-router";
 import Vue from "vue";
@@ -17,10 +21,12 @@ Vue.use(VueRouter);
 
 import ProductSearch from "./components/ProductSearch";
 import Product from "./components/Product";
+import Login from "./components/Login.vue";
 
 const routes = [
-	{ path: "/search", component: ProductSearch },
 	{ path: "/", component: Product },
+	{ path: "/search", component: ProductSearch },
+	{ path: "/login", component: Login },
 ];
 
 const router = new VueRouter({

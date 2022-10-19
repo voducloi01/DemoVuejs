@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { useInsert } from "./useInsert";
+import { useData } from "./useData";
 
 export const useSearch = defineStore("useSearch", () => {
 	const searchText = ref("");
-	const productCopy = useInsert();
+	const productCopy = useData();
 
-	let listSearch = productCopy.productCopy;
+	let listSearch = productCopy.ListProduct;
 
 	const searchProduct = computed(() =>
 		listSearch.filter((e) =>

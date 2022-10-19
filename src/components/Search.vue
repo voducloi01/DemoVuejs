@@ -1,7 +1,6 @@
 <template>
     <div class="collapse navbar-collapse custom__search" id="navbarSupportedContent"  >                    
         <form class="d-flex">
-            <h4> {{search.searchText}}</h4>
           <input v-model="search.searchText" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button  class="btn btn-outline-success">Search</button>
         </form>

@@ -30,7 +30,7 @@
                                 <input type="text" class="form-control" placeholder=" Cho Them Anh Vao" v-model="product.image" />   
                             </div>
                         </div>             
-                            <button v-if="storeUpdate.status" class="btn btn-success mt-2" @click="() => storeInsert.handleinsert(this.product)"> Add Product</button>  
+                            <button v-if="storeUpdate.status" class="btn btn-success mt-2" @click="() => storeData.handleinsert(product)"> Add Product</button>  
                             <button v-else  class="btn btn-success mt-2" @click="storeUpdate.handleUpdate">Update Product</button>   
                 </div>   
             </section>   
@@ -40,17 +40,18 @@
 
 <script>
 // import {ref } from 'vue'
- import {useInsert} from '../store/useInsert'
  import {useUpdate} from '../store/useUpdate'
+ import {useData} from '../store/useData'
 export default {
     name: 'VueBootstrapInsertProduct',
     props :['ListProduct'] ,
   
     setup( ) {  
-    const storeInsert = useInsert() ;
-    const product = storeInsert.product
-    const storeUpdate =  useUpdate () ;        
-        return {storeInsert ,storeUpdate ,product}
+   
+    const storeUpdate =  useUpdate () ;    
+    const storeData = useData() ;  
+    const product = storeData.product ;  
+        return { storeUpdate ,product ,storeData}
     }
      
 };

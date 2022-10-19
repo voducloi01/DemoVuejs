@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-export const useData = defineStore("counter", () => {
+export const useData = defineStore("useData", () => {
 	const ListProduct = ref([
 		{
 			id: 1,
@@ -24,6 +24,24 @@ export const useData = defineStore("counter", () => {
 				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI3bLKfrXKuhnU9bBQeiS0RJuWnkEt3xG6ZA&usqp=CAU",
 		},
 	]);
+	const product = {
+		id: "",
+		product: "",
+		price: "",
+		image: "",
+	};
+	const handleinsert = (product) => {
+		ListProduct.value.push({
+			id: product.id,
+			product: product.product,
+			price: product.price,
+			image: product.image,
+		});
+		product.id = "";
+		product.product = "";
+		product.price = "";
+		product.image = "";
+	};
 
-	return { ListProduct };
+	return { ListProduct, handleinsert, product };
 });

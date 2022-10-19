@@ -1,10 +1,11 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav   class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">          
 
           <div class="topnav">
-            <router-link class="active" to="/">product</router-link>
             <router-link to="/search">Search</router-link>
+            <router-link  class="active" to="/">product</router-link>            
+            <router-link  to="/login" >Login</router-link>
           </div>
            <Search />
         </div>
@@ -15,10 +16,12 @@
   
   <script>
 import Search from './Search.vue';
+
   export default {
     name: "BootsrapExample",
     props : ['show'] , 
-    components: { Search }
+    components: { Search } , 
+ 
 }
   </script>
 

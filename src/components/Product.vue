@@ -15,7 +15,8 @@
                             <div class="buttons d-flex flex-row">   
                                 <div class="cart">                                       
                                 </div> <button class="btn btn-success" @click="e => storeUpdate.handleId(products.id)">  Edit</button>   
-                                       
+                                <button class="btn btn-success ml-5" @click="e => storeDelete.DeleteId(products.id)">  delete</button>                                       
+                                
                             </div>   
 
                         </div>
@@ -28,6 +29,7 @@
     
         </div>
         <InsertProduct />
+
     </div>
    
 </template>
@@ -37,13 +39,16 @@ import {useUpdate} from '../store/useUpdate'
 import {useData} from '../store/useData'
 import {ref} from 'vue'
 import InsertProduct from './InsertProduct.vue';
+import {useDelete} from '../store/useDelete'
 export default {
     name: "VueBootstrapProduct",
     setup() {
         const isShow = ref(true);
         const storeUpdate = useUpdate();
         const dataProduct = useData();
-        return { storeUpdate, isShow, dataProduct };
+        const product = dataProduct.product
+        const storeDelete = useDelete()
+        return { storeUpdate, isShow, dataProduct  ,storeDelete ,product};
     },
     components: { InsertProduct }
 };

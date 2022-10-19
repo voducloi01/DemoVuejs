@@ -1,7 +1,10 @@
 <template>
 
+      
+      
       <div> <Header/>     
             <router-view>
+                  <Login />
                   <ProductSearch />                                                              
                   <Product />                            
             </router-view>    
@@ -13,13 +16,15 @@
 </template>
 
 <script>
+import Login from './components/Login.vue';
 import Header from './components/Header.vue';
 import Product from './components/Product.vue';
 import ProductSearch from './components/ProductSearch.vue';
 
 export default {
     name: "App",
-   components: { Header, Product, ProductSearch } ,
+    components: { Login ,Header ,Product ,ProductSearch }
+   
 }
 </script>
 
