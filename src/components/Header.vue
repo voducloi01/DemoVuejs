@@ -3,9 +3,9 @@
         <div class="container-fluid">          
 
           <div class="topnav">
-            <router-link to="/search">Search</router-link>
-            <router-link  class="active" to="/">product</router-link>            
-            <router-link  to="/login" >Login</router-link>
+            <router-link class="active" to="/search">Search</router-link>
+            <router-link class="active" to="/">Product</router-link>            
+            <router-link class="active" to="/login" >Login</router-link>
           </div>
            <Search />
         </div>
@@ -27,14 +27,19 @@ import Search from './Search.vue';
 
   <style>
   .topnav {
-    background-color: #333;
     overflow: hidden;
+  }
+  .topnav a{
+    color: black
+    
+  }
+  .active {
+    color: black
   }
   
 
   .topnav a {
     float: left;
-    color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;

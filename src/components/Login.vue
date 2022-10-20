@@ -1,20 +1,20 @@
 <template>  
     <div class="login-form">
         <form>
-          <h1>Login</h1>
+          <h1> {{storeLogin.isShow ? 'Register' : 'Login'}} </h1>
           <div class="content">
             <div class="input-field">
-              <input type="text" placeholder="Username" autocomplete="nope" v-model="userCopy.username">
+              <input type="text" required placeholder="Username" autocomplete="nope" v-model="userCopy.username">
             </div>
             <div class="input-field">
-              <input type="password" placeholder="Password" autocomplete="new-password" v-model="userCopy.password">
+              <input type="password" required placeholder="Password" autocomplete="new-password" v-model="userCopy.password">
             </div>
             <a href="#" class="link">Forgot Your Password?</a>
           </div>
           <div class="action">
-            <button>Register</button>
+            <button @click="() => storeLogin.handeleRegister(userCopy)"  >Register</button>
             <button  @click="() => storeLogin.fetchUsers(userCopy)" >
-                             SIGN IN
+             Login
                   </button>
           </div>
         </form>
@@ -33,11 +33,11 @@ export default {
      const storeLogin = useLogin() ; 
 
       const userCopy = {
-        id : "" ,
         username : "" , 
         password : "" ,
       }
-      return {userCopy ,storeLogin }
+
+      return {userCopy ,storeLogin  }
 
     }
 

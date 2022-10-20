@@ -15,19 +15,19 @@
                         <div class="form-group" >   
                             <label for="name" class="col-sm-3 control-label">Name Product</label>    
                             <div class="col-sm-9" >  
-                                <input type="text" class="form-control" placeholder=" Ten San Pham" v-model="product.product" />   
+                                <input type="text" required class="form-control" placeholder=" Ten San Pham" v-model="product.product" />   
                             </div>
                         </div> 
                         <div class="form-group" >   
-                            <label for="name" class="col-sm-3 control-label">Price Product</label>    
+                            <label for="name"  class="col-sm-3 control-label">Price Product</label>    
                             <div class="col-sm-9" >  
-                                <input type="text" class="form-control" placeholder=" Gia Tien" v-model="product.price" />   
+                                <input type="text" required class="form-control" placeholder=" Gia Tien" v-model="product.price" />   
                             </div>
                         </div> 
                         <div class="form-group" >   
                             <label for="name" class="col-sm-3 control-label">Image Product</label>    
                             <div class="col-sm-9" >  
-                                <input type="text" class="form-control" placeholder=" Cho Them Anh Vao" v-model="product.image" />   
+                                <input type="text" required class="form-control" placeholder=" Cho Them Anh Vao" v-model="product.image" />   
                             </div>
                         </div>             
                             <button v-if="storeUpdate.status" class="btn btn-success mt-2" @click="() => storeData.handleinsert(product)"> Add Product</button>  

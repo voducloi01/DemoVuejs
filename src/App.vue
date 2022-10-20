@@ -1,18 +1,11 @@
-<template>
-
-      
-      
+<template>      
       <div> <Header/>     
             <router-view>
                   <Login />
                   <ProductSearch />                                                              
                   <Product />                            
-            </router-view>    
-                          
-                               
+            </router-view>                               
       </div>
-
-
 </template>
 
 <script>
