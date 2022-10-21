@@ -3,11 +3,18 @@
         <form>
           <h1> {{storeLogin.isShow ? 'Register' : 'Login'}} </h1>
           <div class="content">
+         
             <div class="input-field">
-              <input type="text" required placeholder="Username" autocomplete="nope" v-model="userCopy.username">
-            </div>
+              <ValidationProvider rules="required|alpha_num|min:1 " v-slot="{ errors }">
+              <input type="text"  placeholder="Username" autocomplete="nope" v-model="userCopy.username">
+              <span style="color: red;" id="error">{{ errors[0] }}</span>
+             </ValidationProvider>
+              </div>
             <div class="input-field">
-              <input type="password" required placeholder="Password" autocomplete="new-password" v-model="userCopy.password">
+              <ValidationProvider rules="required|min:1 " v-slot="{ errors }">                         
+              <input type="password"  placeholder="Password" autocomplete="new-password" v-model="userCopy.password">
+              <span style="color: red;" id="error">{{ errors[0] }}</span>            
+            </ValidationProvider>
             </div>
             <a href="#" class="link">Forgot Your Password?</a>
           </div>
@@ -24,9 +31,13 @@
 <script>
 
 import {useLogin} from '../store/useLogin'
+import { ValidationProvider } from 'vee-validate';
 
 export default {
     name: 'DemoLogin',
+    components: {
+    ValidationProvider
+  } ,
 
     setup() {
 

@@ -12,6 +12,17 @@ import VueRouter from "vue-router";
 import Vue from "vue";
 import App from "./App.vue";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+
+import Vuelidate from "vuelidate";
+Vue.use(Vuelidate);
+import VeeValidate from "vee-validate";
+Vue.use(VeeValidate);
+import { ValidationObserver } from "vee-validate";
+import { ValidationProvider } from "vee-validate/dist/vee-validate.full.esm";
+Vue.component("ValidationProvider", ValidationProvider);
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.config.productionTip = false;
+
 Vue.config.productionTip = false;
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";

@@ -7,28 +7,41 @@
                 </div>   
                 <div class="panel-body">    
                         <div class="form-group" >   
+                          
                             <label for="name" class="col-sm-3 control-label"  >Id Product</label>    
-                            <div class="col-sm-9" >  
+                            <div class="col-sm-9" >
+                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">  
                                 <input :disabled="!storeUpdate.status" type="text" class="form-control" placeholder=" Id" v-model="product.id" />   
+                                <span style="color: red;" id="error">{{ errors[0] }}</span>
+                                </ValidationProvider>
                             </div>
                         </div> 
                         <div class="form-group" >   
                             <label for="name" class="col-sm-3 control-label">Name Product</label>    
-                            <div class="col-sm-9" >  
+                            <div class="col-sm-9" > 
+                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">   
                                 <input type="text" required class="form-control" placeholder=" Ten San Pham" v-model="product.product" />   
+                                <span style="color: red;" id="error">{{ errors[0] }}</span>
+                            </ValidationProvider>
                             </div>
                         </div> 
                         <div class="form-group" >   
                             <label for="name"  class="col-sm-3 control-label">Price Product</label>    
-                            <div class="col-sm-9" >  
+                            <div class="col-sm-9" >
+                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">    
                                 <input type="text" required class="form-control" placeholder=" Gia Tien" v-model="product.price" />   
+                               <span style="color: red;" id="error">{{ errors[0] }}</span>
+                            </ValidationProvider>
                             </div>
                         </div> 
                         <div class="form-group" >   
                             <label for="name" class="col-sm-3 control-label">Image Product</label>    
                             <div class="col-sm-9" >  
-                                <input type="text" required class="form-control" placeholder=" Cho Them Anh Vao" v-model="product.image" />   
-                            </div>
+                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">         
+                                    <input type="text" required class="form-control" placeholder=" Cho Them Anh Vao" v-model="product.image" />   
+                                    <span style="color: red;" id="error">{{ errors[0] }}</span>
+                                </ValidationProvider>
+                                </div>
                         </div>             
                             <button v-if="storeUpdate.status" class="btn btn-success mt-2" @click="() => storeData.handleinsert(product)"> Add Product</button>  
                             <button v-else  class="btn btn-success mt-2" @click="storeUpdate.handleUpdate">Update Product</button>   
@@ -42,9 +55,13 @@
 // import {ref } from 'vue'
  import {useUpdate} from '../store/useUpdate'
  import {useData} from '../store/useData'
+ import { ValidationProvider } from 'vee-validate';
 export default {
     name: 'VueBootstrapInsertProduct',
     props :['ListProduct'] ,
+    components: {
+    ValidationProvider
+  } ,
   
     setup( ) {  
    
