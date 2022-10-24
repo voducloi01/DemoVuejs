@@ -18,7 +18,7 @@ Vue.use(Vuelidate);
 import VeeValidate from "vee-validate";
 Vue.use(VeeValidate);
 import { ValidationObserver } from "vee-validate";
-import { ValidationProvider } from "vee-validate/dist/vee-validate.full.esm";
+import { ValidationProvider } from "vee-validate";
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.config.productionTip = false;
@@ -33,14 +33,16 @@ Vue.use(VueRouter);
 import ProductSearch from "./components/ProductSearch";
 import Product from "./components/Product";
 import Login from "./components/Login.vue";
+import Cart from "./components/Cart.vue";
 
 const routes = [
 	{ path: "/", component: Product },
 	{ path: "/search", component: ProductSearch },
 	{ path: "/login", component: Login },
+	{ path: "/cart", component: Cart },
 ];
 
-const router = new VueRouter({
+export const router = new VueRouter({
 	routes,
 });
 new Vue({

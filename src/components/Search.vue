@@ -9,13 +9,13 @@
 
 <script>
 
-import {useSearch} from '../store/useSearch'
+import {useData} from '../store/useData'
 
 export default {
     name: 'VueBootstrapSearch',
 
     setup() {
-        const search = useSearch() ;
+        const search = useData() ;
         return { search}
     }
 };

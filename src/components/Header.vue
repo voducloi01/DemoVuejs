@@ -6,6 +6,8 @@
             <router-link class="active" to="/search">Search</router-link>
             <router-link class="active" to="/">Product</router-link>            
             <router-link class="active" to="/login" >Login</router-link>
+            <router-link class="active" to="/cart" >Cart</router-link>
+
           </div>
            <Search />
         </div>

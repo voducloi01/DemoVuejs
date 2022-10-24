@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export const useData = defineStore("useData", () => {
 	const ListProduct = ref([
 		{
@@ -43,5 +43,12 @@ export const useData = defineStore("useData", () => {
 		product.image = "";
 	};
 
-	return { ListProduct, handleinsert, product };
+	const searchText = ref("");
+	const searchProduct = computed(() =>
+		ListProduct.value.filter((e) =>
+			e.product.toLowerCase().includes(searchText.value.toLowerCase())
+		)
+	);
+
+	return { ListProduct, handleinsert, product, searchProduct, searchText };
 });

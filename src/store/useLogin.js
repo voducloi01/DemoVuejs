@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { router } from "../main";
 export const useLogin = defineStore("useLogin", () => {
 	const isShow = ref(true);
-	const isLogin = ref(false);
 
 	const users = [
 		{
@@ -11,23 +11,9 @@ export const useLogin = defineStore("useLogin", () => {
 		},
 		{
 			username: "voducloi1",
-			password: "123456",
+			password: "123",
 		},
 	];
-
-	const fetchUsers = (userCopy) => {
-		const checkUser = users.filter(
-			(e) =>
-				e.username === userCopy.username && e.password === userCopy.password
-		);
-
-		if (checkUser.length === 0) {
-			alert("Đăng nhập thất bại");
-		} else {
-			alert("Đăng nhập thành công");
-			isLogin.value = true;
-		}
-	};
 
 	const handeleRegister = (userCopy) => {
 		const checkUserName = users.map((e) => e.username);
@@ -38,12 +24,23 @@ export const useLogin = defineStore("useLogin", () => {
 				username: userCopy.username,
 				password: userCopy.password,
 			});
-			userCopy.username = "";
-			userCopy.password = "";
 			isShow.value = !isShow.value;
 			alert("Đăng Ký Thành Công !");
 		}
 	};
+	const fetchUsers = (userCopy) => {
+		const checkUser = users.filter(
+			(e) =>
+				e.username === userCopy.username && e.password === userCopy.password
+		);
 
-	return { users, fetchUsers, handeleRegister, isShow, isLogin };
+		if (checkUser.length === 0) {
+			alert("Đăng nhập thất bại");
+		} else {
+			alert("Đăng nhập thành công");
+			router.push({ path: "/", replace: true });
+		}
+	};
+
+	return { users, fetchUsers, handeleRegister, isShow };
 });

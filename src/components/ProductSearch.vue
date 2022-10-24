@@ -13,6 +13,9 @@
                         <div class="product-details"> 
                             <span class="font-weight-bold d-block">{{products.price}}</span>    
                             <span>{{products.product}}</span>   
+                            <div class="cart">
+                            <button class="btn btn-success ml-5" @click="() => storeCart.handleBuy(products.id)"> Buy</button>   
+                        </div>
                         </div>  
                     </div>   
                 </div>    
@@ -23,14 +26,16 @@
 
 <script>
 
-import {useSearch} from '../store/useSearch'
+import {useData} from '../store/useData'
+import { useCart} from '../store/useCart'
 export default {
     name: 'VueBootstrapProduct',
     props : ['ListProduct'] ,
     setup() {
       
-        const storeSearch = useSearch()
-        return { storeSearch}   
+        const storeSearch = useData()
+        const storeCart = useCart()
+        return { storeSearch ,storeCart}   
     }
 };
 </script>

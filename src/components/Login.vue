@@ -20,9 +20,9 @@
           </div>
           <div class="action">
             <button @click="() => storeLogin.handeleRegister(userCopy)"  >Register</button>
-            <button  @click="() => storeLogin.fetchUsers(userCopy)" >
-             Login
-                  </button>
+            <button   @click="() => storeLogin.fetchUsers(userCopy)" >
+                  Login
+            </button>
           </div>
         </form>
       </div>
