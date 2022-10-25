@@ -7,18 +7,14 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name Product</th>
                 <th scope="col">Price Product</th>
-                <th scope="col">Quantity</th>
-
                 <th scope="col">Image Product</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="product in storeCart.MyCart" :key="product.id">
                 <th scope="row">{{product.id}}</th>
-                <td>{{product.name}}</td>
+                <td>{{product.product}}</td>
                 <td>{{product.price}}</td>
-                <td><input type="number" :value="product.soluong" /></td>
-
                 <td><img :src="product.image " width="100"  height="100px"/></td>
               </tr>
             </tbody>
@@ -33,6 +29,7 @@ export default {
     setup() {
 
       const storeCart = useCart() ; 
+      console.log(storeCart.MyCart);
       return {storeCart}
 
     }

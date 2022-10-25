@@ -1,25 +1,33 @@
 import { defineStore } from "pinia";
-import { useData } from "../store/useData";
-
+import { ref, onMounted } from "vue";
+import axios from "axios";
 export const useCart = defineStore("useCart", () => {
-	let MyCart = [];
-	const dataStore = useData();
+	const MyCart = ref([]);
+	const getProduct = async () => {
+		try {
+			await axios
+				.get("https://63564d459243cf412f812aea.mockapi.io/cart")
+				.then((response) => {
+					MyCart.value = response.data;
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	onMounted(() => {
+		getProduct();
+	});
+	const handleBuy = async (product) => {
+		try {
+			const res = await axios.post(
+				"https://63564d459243cf412f812aea.mockapi.io/cart",
+				product
+			);
 
-	const handleBuy = (id) => {
-		const listProduct = dataStore.ListProduct.filter((e) => e.id === id);
-		const checkCart = MyCart.map((e) => e.id);
-		if (checkCart.includes(listProduct[0].id)) {
-			const index = MyCart.findIndex((e) => e.id === listProduct[0].id);
-			MyCart[index].soluong = MyCart[index].soluong + 1;
-		} else {
-			MyCart.push({
-				id: listProduct[0].id,
-				name: listProduct[0].product,
-				price: listProduct[0].price,
-				image: listProduct[0].image,
-				soluong: 1,
-			});
-			alert("Thêm giỏ hàng thành công !");
+			MyCart.value.push(res.data);
+			alert("Thêm thành công !");
+		} catch (error) {
+			console.log(error);
 		}
 	};
 

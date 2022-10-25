@@ -14,9 +14,11 @@ import Header from './components/Header.vue';
 import Product from './components/Product.vue';
 import ProductSearch from './components/ProductSearch.vue';
 
+
 export default {
     name: "App",
-    components: { Login ,Header ,Product ,ProductSearch }
+    components: { Login ,Header ,Product ,ProductSearch } 
+   
    
 }
 </script>
