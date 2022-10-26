@@ -6,7 +6,7 @@ export const useData = defineStore("useData", () => {
 	const product = {
 		id: "",
 		product: "",
-		price: "",
+		price: 0,
 		image: "",
 	};
 	const handleinsert = async (product) => {

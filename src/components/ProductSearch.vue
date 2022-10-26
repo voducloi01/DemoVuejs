@@ -1,7 +1,6 @@
 <template>
    
-        <div class="container">    
-            
+        <div class="container">                
             <h3>Sản Phẩm Tìm Kiếm</h3>
             <div class="row g-1">   
                 <div class="col-md-3" v-for=" ( products,index) in storeSearch.searchProduct" :key="index">   
@@ -9,10 +8,11 @@
                         <div class="text-center">  
                             <img :src="products.image" width="200"  height="140px">  
                         </div>
-
                         <div class="product-details"> 
                             <span class="font-weight-bold d-block">{{products.price}}</span>    
-                            <span>{{products.product}}</span>  
+                            <span>{{products.product}}</span> 
+                            <br/>
+                            <span>Mã Sản Phẩm {{products.id}}</span> 
                             <div class="cart">
                             <button class="btn btn-success ml-5" @click="() => storeCart.handleBuy(products)"> Buy</button>   
                         </div>
@@ -34,7 +34,6 @@ export default {
     setup() {
         
         const storeSearch = useData()
-        console.log( storeSearch);
         const storeCart = useCart()
         return { storeSearch ,storeCart}   
     }

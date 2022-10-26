@@ -7,18 +7,24 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name Product</th>
                 <th scope="col">Price Product</th>
+                <th>Số Lượng</th>
                 <th scope="col">Image Product</th>
+                <th scope="col">Quản lí</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="product in storeCart.MyCart" :key="product.id">
-                <th scope="row">{{product.id}}</th>
+              <tr v-for=" (product , index) in storeCart.MyCart" :key="index">
+                <td>{{product.id}}</td>
                 <td>{{product.product}}</td>
                 <td>{{product.price}}</td>
-                <td><img :src="product.image " width="100"  height="100px"/></td>
+                <td><input type="number" :value="product.SoLuong"  min="1"/></td>
+                <td><img :src="product.image " width="70px"  height="70px"/></td>
+                <td> <button class="btn btn-danger" @click="() => storeCart.handleDelete(product)"> Xóa </button></td>
               </tr>
+             
             </tbody>
           </table>
+          <h2> Tổng tiền :{{storeCart.Total}} </h2>
     </div>
 </template>
 
@@ -29,7 +35,6 @@ export default {
     setup() {
 
       const storeCart = useCart() ; 
-      console.log(storeCart.MyCart);
       return {storeCart}
 
     }
