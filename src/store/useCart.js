@@ -30,17 +30,24 @@ export const useCart = defineStore("useCart", () => {
 						product: product.id,
 						price: product.price,
 						image: product.image,
+						SoLuong: SoLuong.value,
 					}
 				);
 				const data = { ...res.data, SoLuong: SoLuong.value };
 				MyCart.value.push(data);
-				Total.value += product.price;
+				Total.value = 0;
+				for (const value of MyCart.value) {
+					Total.value += value.price * value.SoLuong;
+				}
 				alert("Thêm sản phẩm thành công !");
 			} else {
-				alert("Đã có trong giỏ hàng !");
 				const index = MyCart.value.findIndex((e) => e.id === product.id);
-				Total.value += product.price;
 				MyCart.value[index].SoLuong += 1;
+				Total.value = 0;
+				for (const value of MyCart.value) {
+					Total.value += value.price * value.SoLuong;
+				}
+				alert("Đã có trong giỏ hàng !");
 			}
 		} catch (error) {
 			console.log(error);
@@ -53,11 +60,38 @@ export const useCart = defineStore("useCart", () => {
 				`https://63564d459243cf412f812aea.mockapi.io/cart/${product.id}`
 			);
 			MyCart.value = MyCart.value.filter((e) => e.id !== product.id);
-			// Total.value = Total.value - Number(product.price);
+			alert("Xóa thành công !");
+			Total.value = 0;
+			for (const value of MyCart.value) {
+				Total.value += value.price * value.SoLuong;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	const handleUpdate = async (product) => {
+		try {
+			const respon = await axios.put(
+				`https://63564d459243cf412f812aea.mockapi.io/cart/${product.id}`,
+				{
+					product: product.id,
+					price: product.price,
+					image: product.image,
+					SoLuong: Number(product.SoLuong),
+				}
+			);
+
+			const index = MyCart.value.findIndex((e) => e.id === product.id);
+			MyCart.value[index].SoLuong = respon.data.SoLuong;
+			Total.value = 0;
+			for (const value of MyCart.value) {
+				Total.value += value.price * value.SoLuong;
+			}
+			alert("Cập nhập thành công!");
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	return { handleBuy, MyCart, handleDelete, Total, SoLuong };
+	return { handleBuy, MyCart, handleDelete, Total, SoLuong, handleUpdate };
 });

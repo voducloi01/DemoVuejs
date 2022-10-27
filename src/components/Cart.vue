@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h2 class="title_cart"> My Cart</h2>
         <table class="table">
             <thead>
@@ -17,9 +17,11 @@
                 <td>{{product.id}}</td>
                 <td>{{product.product}}</td>
                 <td>{{product.price}}</td>
-                <td><input type="number" :value="product.SoLuong"  min="1"/></td>
+                <td><input type="number" v-model="product.SoLuong"  min="1"/></td>
                 <td><img :src="product.image " width="70px"  height="70px"/></td>
-                <td> <button class="btn btn-danger" @click="() => storeCart.handleDelete(product)"> Xóa </button></td>
+                <td> <button class="btn btn-danger" @click="() => storeCart.handleDelete(product)"> Xóa </button>
+                <button style="margin-left: 5px;" class="btn btn-danger" @click="() => storeCart.handleUpdate(product)"> Cập nhập </button>          
+                </td>
               </tr>
              
             </tbody>
@@ -35,6 +37,7 @@ export default {
     setup() {
 
       const storeCart = useCart() ; 
+    
       return {storeCart}
 
     }

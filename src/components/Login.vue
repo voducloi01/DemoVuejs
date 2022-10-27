@@ -1,7 +1,7 @@
 <template>  
     <div class="login-form">
         <form>
-          <h1> {{storeLogin.isShow ? 'Register' : 'Login'}} </h1>
+          <h1> {{storeLogin.isShow ? 'Login' : 'Register'}} </h1>
           <div class="content">
          
             <div class="input-field">
@@ -16,7 +16,9 @@
               <span style="color: red;" id="error">{{ errors[0] }}</span>            
             </ValidationProvider>
             </div>
-            <a href="#" class="link">Forgot Your Password?</a>
+            <a href="#" class="link text-danger"  @click="storeLogin.isShow = false">Đăng Ký Account ?</a>
+            <br/>
+            <a href="#" class="link text-success"  @click="storeLogin.isShow = true">Đã có Account ?</a>
           </div>
           <div class="action">
             <button @click="() => storeLogin.handeleRegister(userCopy)"  >Register</button>

@@ -4,7 +4,7 @@ import { router } from "../main";
 import axios from "axios";
 export const useLogin = defineStore("useLogin", () => {
 	const isShow = ref(true);
-
+	const isShowLogout = ref(true);
 	const users = ref([]);
 
 	const getUsers = async () => {
@@ -52,5 +52,12 @@ export const useLogin = defineStore("useLogin", () => {
 		}
 	};
 
-	return { users, fetchUsers, handeleRegister, isShow, getUsers };
+	return {
+		users,
+		fetchUsers,
+		handeleRegister,
+		isShow,
+		getUsers,
+		isShowLogout,
+	};
 });
