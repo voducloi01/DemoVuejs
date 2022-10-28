@@ -45,6 +45,10 @@ const routes = [
 export const router = new VueRouter({
 	routes,
 });
+import Paginate from "vuejs-paginate";
+Vue.use(Paginate);
+import JwPagination from "jw-vue-pagination";
+Vue.component("jw-pagination", JwPagination);
 new Vue({
 	render: (h) => h(App),
 	pinia,

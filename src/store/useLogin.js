@@ -48,6 +48,7 @@ export const useLogin = defineStore("useLogin", () => {
 			alert("Đăng nhập thất bại");
 		} else {
 			alert("Đăng nhập thành công");
+			isShowLogout.value = false;
 			router.push({ path: "/", replace: true });
 		}
 	};

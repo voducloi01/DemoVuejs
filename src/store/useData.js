@@ -17,6 +17,7 @@ export const useData = defineStore("useData", () => {
 			);
 
 			ListProduct.value.push(res.data);
+			alert("Thêm thành công!");
 		} catch (error) {
 			console.log(error);
 		}
@@ -46,6 +47,7 @@ export const useData = defineStore("useData", () => {
 				`https://63564d459243cf412f812aea.mockapi.io/products/${id}`
 			);
 			ListProduct.value = ListProduct.value.filter((e) => e.id !== id);
+			alert("Xóa Thành Công !");
 		} catch (error) {
 			console.log(error);
 		}
@@ -72,6 +74,7 @@ export const useData = defineStore("useData", () => {
 			ListProduct.value[index].product = respon.data.product;
 			ListProduct.value[index].price = respon.data.price;
 			ListProduct.value[index].image = respon.data.image;
+			alert("Cập nhập thành công !");
 		} catch (error) {
 			console.log(error);
 		}

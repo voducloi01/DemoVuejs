@@ -27,7 +27,7 @@ export const useCart = defineStore("useCart", () => {
 				const res = await axios.post(
 					"https://63564d459243cf412f812aea.mockapi.io/cart",
 					{
-						product: product.id,
+						product: product.product,
 						price: product.price,
 						image: product.image,
 						SoLuong: SoLuong.value,

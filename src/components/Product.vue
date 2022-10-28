@@ -4,7 +4,7 @@
      
         <div  class="container">    
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( products,index) in dataProduct.ListProduct" :key="index">   
+                <div class="col-md-3" v-for=" ( products,index) in dataProduct.searchProduct" :key="index">   
                     <div class="card p-4" >   
                         <div class="text-center">  
                             <img :src="products.image" width="200"  height="140px">  
