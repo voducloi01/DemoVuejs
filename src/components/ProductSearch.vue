@@ -1,58 +1,68 @@
 <template>
-    
-    <div class="wrapper">    
-     
-        <div  class="container">    
+   
+        <div class="container">                
+            <h3>Sản Phẩm Tìm Kiếm</h3>
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( products,index) in dataProduct.searchProduct" :key="index">   
+                <div class="col-md-3" v-for=" ( products,index) in pageOfItems" :key="index">   
                     <div class="card p-4" >   
                         <div class="text-center">  
                             <img :src="products.image" width="200"  height="140px">  
-                        </div>   
+                        </div>
                         <div class="product-details"> 
                             <span class="font-weight-bold d-block">{{products.price}}</span>    
-                            <span>{{products.product}}</span>   
-                            <div class="buttons d-flex flex-row">   
-                                <div class="cart">                                       
-                                </div> <button class="btn btn-success" @click="() => dataProduct.handleId(products.id)">  Edit</button>   
-                                <button class="btn btn-success ml-5" @click="() => dataProduct.DeleteId(products.id)">  delete</button>                                       
-                                
-                            </div>   
-
+                            <span>{{products.product}}</span> 
+                            <br/>
+                            <span>Mã Sản Phẩm {{products.id}}</span> 
+                            <div class="cart">
+                            <button class="btn btn-success ml-5" @click="() => storeCart.handleBuy(products)"> Buy</button>   
                         </div>
-    
-                    </div>
-    
-                </div>
-    
-            </div>
-    
-        </div>
-        <InsertProduct />
+                        </div>  
+                    </div>  
+                  
+                </div>    
+            </div>   
+            <div class="paginate">
 
-    </div>
-   
+                <jw-pagination :items="exampleItems" @changePage="onChangePage" :pageSize="8"></jw-pagination>
+            </div> 
+        </div>
+
 </template>
 
 <script>
-import {useData} from '../store/useData'
-import {ref} from 'vue'
-import InsertProduct from './InsertProduct.vue';
-export default {
-    name: "VueBootstrapProduct",
-    setup() {
-        const isShow = ref(true);
-        
-        const dataProduct = useData();
-        const product = dataProduct.product
 
-        return {isShow, dataProduct  ,product};
+import {useData} from '../store/useData'
+import { useCart} from '../store/useCart'
+export default {
+    name: 'VueBootstrapProduct',
+    props : ['ListProduct'] ,
+    setup() {
+        
+        const storeSearch = useData()
+        const storeCart = useCart()
+      
+        const exampleItems = [...storeSearch.searchProduct].map(e => ({ product : e.product , price : e.price  , id : e.id , image : e.image}));             
+        return { storeSearch ,storeCart ,exampleItems}   
     },
-    components: { InsertProduct }
+    data() {
+        return {
+            pageOfItems: []
+        };
+    },
+
+    methods: {
+        onChangePage(pageOfItems) {
+            this.pageOfItems = pageOfItems;
+        }
+    }
 };
 </script>
 
 <style>
+.paginate {
+    text-align: center;
+    margin: 20px 0;
+}
 body {
     background: #eee;
 }
