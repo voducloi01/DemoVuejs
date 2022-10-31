@@ -1,24 +1,20 @@
-<template>
-    
-    <div class="wrapper">    
-     
+<template>   
+    <div class="wrapper">      
         <div  class="container">    
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( products,index) in dataProduct.searchProduct" :key="index">   
+                <div class="col-md-3" v-for=" ( product,index) in products" :key="index"> 
                     <div class="card p-4" >   
                         <div class="text-center">  
-                            <img :src="products.image" width="200"  height="140px">  
+                            <img :src="product.image" width="200"  height="140px">  
                         </div>   
                         <div class="product-details"> 
-                            <span class="font-weight-bold d-block">{{products.price}}</span>    
-                            <span>{{products.product}}</span>   
+                            <span class="font-weight-bold d-block">{{product.price}}</span>    
+                            <span>{{product.name}}</span>   
                             <div class="buttons d-flex flex-row">   
                                 <div class="cart">                                       
-                                </div> <button class="btn btn-success" @click="() => dataProduct.handleId(products.id)">  Edit</button>   
-                                <button class="btn btn-success ml-5" @click="() => dataProduct.DeleteId(products.id)">  delete</button>                                       
-                                
+                                </div> <button class="btn btn-success" @click="() => dataProduct.handleId(product.id)">  Edit</button>   
+                                <button class="btn btn-success ml-5" @click="() => dataProduct.DeleteId(product.id)">  delete</button>                                                                       
                             </div>   
-
                         </div>
     
                     </div>
@@ -38,17 +34,22 @@
 import {useData} from '../store/useData'
 import {ref} from 'vue'
 import InsertProduct from './InsertProduct.vue';
+import { ALL_PRODUCT_QUERY } from '../graphql/allProducts'
 export default {
     name: "VueBootstrapProduct",
     setup() {
-        const isShow = ref(true);
-        
+        const isShow = ref(true);     
         const dataProduct = useData();
         const product = dataProduct.product
-
         return {isShow, dataProduct  ,product};
     },
-    components: { InsertProduct }
+    components: { InsertProduct }  ,
+    apollo: {
+    products: {
+      query: ALL_PRODUCT_QUERY 
+    }
+  }
+ 
 };
 </script>
 
