@@ -5,7 +5,7 @@ export const useData = defineStore("useData", () => {
 	let ListProduct = ref([]);
 	const product = {
 		id: "",
-		product: "",
+		name: "",
 		price: 0,
 		image: "",
 	};

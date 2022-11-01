@@ -3,74 +3,63 @@
         <div class="container">        
             <section class="panel panel-default">   
                 <div class="panel-heading">    
-                    <h3 class="panel-title">{{storeData.status ? 'Add Product' : 'Update'}}  </h3>   
-                </div>   
-                <div class="panel-body">    
-                        <div class="form-group" >   
-                          
-                            <label for="name" class="col-sm-3 control-label"  >Id Product</label>    
-                            <div class="col-sm-9" >
-                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">  
-                                <input :disabled="!storeData.status" type="text" class="form-control" placeholder=" Id" v-model="product.id" />   
-                                <span style="color: red;" id="error">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                            </div>
-                        </div> 
-                        <div class="form-group" >   
-                            <label for="name" class="col-sm-3 control-label">Name Product</label>    
-                            <div class="col-sm-9" > 
-                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">   
-                                <input type="text" required class="form-control" placeholder=" Ten San Pham" v-model="product.product" />   
-                                <span style="color: red;" id="error">{{ errors[0] }}</span>
-                            </ValidationProvider>
-                            </div>
-                        </div> 
-                        <div class="form-group" >   
-                            <label for="name"  class="col-sm-3 control-label">Price Product</label>    
-                            <div class="col-sm-9" >
-                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">    
-                                <input type="text" required class="form-control" placeholder=" Gia Tien" v-model="product.price" />   
-                               <span style="color: red;" id="error">{{ errors[0] }}</span>
-                            </ValidationProvider>
-                            </div>
-                        </div> 
-                        <div class="form-group" >   
-                            <label for="name" class="col-sm-3 control-label">Image Product</label>    
-                            <div class="col-sm-9" >  
-                                <ValidationProvider rules="required|min:1 " v-slot="{ errors }">         
-                                    <input type="text" required class="form-control" placeholder=" Cho Them Anh Vao" v-model="product.image" />   
-                                    <span style="color: red;" id="error">{{ errors[0] }}</span>
-                                </ValidationProvider>
-                                </div>
-                        </div>             
-                            <button v-if="storeData.status" class="btn btn-success mt-2" @click="() => storeData.handleinsert(product)"> Add Product</button>  
-                            <button v-else  class="btn btn-success mt-2" @click="() => storeData.handleUpdate(product)">Update Product</button>   
-                </div>   
+                    <h3 class="panel-title">Thêm sản phẩm </h3>   
+                </div>  
+                <form>
+                  <label>Tên sản phẩm</label>
+                  <input type="text" name="name" v-model="name">
+            
+                  <label>Gía Tiền</label>
+                  <input type="text" name="price" v-model="price">
+            
+                  <label>Hình ảnh</label>
+                  <input type="text" name="image" v-model="image">
+                  
+                  <input v-if="!id" type="button" @click="createContact(name, price, image)" value="Add">
+                  <!-- <input type="button" @click="clearForm()" value="Clear"> -->
+                </form>
             </section>   
         </div>   
     </div>
 </template>
 
 <script>
- import {useData} from '../store/useData'
- import { ValidationProvider } from 'vee-validate';
+ import gql from 'graphql-tag'
+
 export default {
     name: 'VueBootstrapInsertProduct',
-    props :['ListProduct'] ,
-    components: {
-    ValidationProvider
+    data() {
+    return {
+        id : "" ,
+        name : ""  ,
+        price : "" , 
+        image  : ""
+
+    };
   } ,
-  
-    setup( ) {  
-   
-    const storeData = useData() ;  
-    const product = storeData.product ;  
-        return { product ,storeData}
-    }
-     
+  methods: {
+    createContact(name ,price ,image){
+      console.log(`Create contact: ${name}`)
+      this.$apollo.mutate({
+          mutation: gql`
+              mutation createProduct($name: String!, $price: Int!, $image: String!) {
+                createProduct(name: $name ,  price: $price  , image: $image) {
+                  id,
+                  name,
+                  price,
+                  image,
+                }
+              }
+            `,
+          variables:{
+           name : name ,
+            price : price ,
+            image  : image
+          }
+        }
+      )
+      // location.reload();
+    },
+  } 
 };
 </script>
-
-<style >
-
-</style>

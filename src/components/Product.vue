@@ -25,7 +25,6 @@
     
         </div>
         <InsertProduct />
-
     </div>
    
 </template>
