@@ -9,19 +9,10 @@ export const useData = defineStore("useData", () => {
 		price: 0,
 		image: "",
 	};
-	const handleinsert = async (product) => {
-		try {
-			const res = await axios.post(
-				"https://63564d459243cf412f812aea.mockapi.io/products",
-				product
-			);
 
-			ListProduct.value.push(res.data);
-			alert("Thêm thành công!");
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	// const handleinsert = async (product) => {
+	// 	ListProduct.value.push();
+	// };
 	const searchText = ref("");
 	const searchProduct = computed(() =>
 		ListProduct.value.filter((e) =>
@@ -86,7 +77,6 @@ export const useData = defineStore("useData", () => {
 
 	return {
 		ListProduct,
-		handleinsert,
 		product,
 		searchProduct,
 		searchText,

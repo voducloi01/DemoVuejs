@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import gql from "graphql-tag";
 
 export const createProduct = gql`
-	mutation createProduct($name: String, $price: Int, $image: String) {
+	mutation ($name: String!, $price: Int!, $image: String!) {
 		createProduct(name: $name, price: $price, image: $image) {
 			id
 			name

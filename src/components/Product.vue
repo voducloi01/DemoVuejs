@@ -2,7 +2,7 @@
     <div class="wrapper">      
         <div  class="container">    
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( product,index) in products" :key="index"> 
+                <div class="col-md-3" v-for=" ( product) in products" :key="product.id"> 
                     <div class="card p-4" >   
                         <div class="text-center">  
                             <img :src="product.image" width="200"  height="140px">  
@@ -12,7 +12,7 @@
                             <span>{{product.name}}</span>   
                             <div class="buttons d-flex flex-row">   
                                 <div class="cart">                                       
-                                </div> <button class="btn btn-success" @click="() => dataProduct.handleId(product.id)">  Edit</button>   
+                                </div> <button class="btn btn-success" @click="() => handleId(product)">  Edit</button>   
                                 <button class="btn btn-success ml-5" @click="() => dataProduct.DeleteId(product.id)">  delete</button>                                                                       
                             </div>   
                         </div>
@@ -30,17 +30,16 @@
 </template>
 
 <script>
-import {useData} from '../store/useData'
-import {ref} from 'vue'
+
 import InsertProduct from './InsertProduct.vue';
 import { ALL_PRODUCT_QUERY } from '../graphql/allProducts'
 export default {
     name: "VueBootstrapProduct",
     setup() {
-        const isShow = ref(true);     
-        const dataProduct = useData();
-        const product = dataProduct.product
-        return {isShow, dataProduct  ,product};
+        const handleId = (a) => {
+            console.log(a);
+        }
+        return {handleId}
     },
     components: { InsertProduct }  ,
     apollo: {

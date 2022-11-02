@@ -5,18 +5,17 @@
                 <div class="panel-heading">    
                     <h3 class="panel-title">Thêm sản phẩm </h3>   
                 </div>  
-                <form>
+                <form class="wrap_input">
                   <label>Tên sản phẩm</label>
-                  <input type="text" name="name" v-model="name">
-            
+                  <input type="text" name="name" v-model="product.name">
+                 
                   <label>Gía Tiền</label>
-                  <input type="text" name="price" v-model="price">
+                  <input type="text" name="price" v-model="product.price">
             
                   <label>Hình ảnh</label>
-                  <input type="text" name="image" v-model="image">
+                  <input type="text" name="image" v-model="product.image">
                   
-                  <input v-if="!id" type="button" @click="createContact(name, price, image)" value="Add">
-                  <!-- <input type="button" @click="clearForm()" value="Clear"> -->
+                  <input v-if="!id" type="button" class="btn btn-success mt-2" @click="createContact(product)" value="Add">
                 </form>
             </section>   
         </div>   
@@ -24,42 +23,38 @@
 </template>
 
 <script>
- import gql from 'graphql-tag'
+ import {useData} from '../store/useData'
+ import {createProduct} from '../graphql/createProduct'
 
 export default {
     name: 'VueBootstrapInsertProduct',
-    data() {
-    return {
-        id : "" ,
-        name : ""  ,
-        price : "" , 
-        image  : ""
-
-    };
+  setup () {
+    const data  = useData() ; 
+    const product = data.product ;
+  return {product}
   } ,
   methods: {
-    createContact(name ,price ,image){
-      console.log(`Create contact: ${name}`)
+    createContact(product){
+      console.log(`Create contact: ${product}`)
       this.$apollo.mutate({
-          mutation: gql`
-              mutation createProduct($name: String!, $price: Int!, $image: String!) {
-                createProduct(name: $name ,  price: $price  , image: $image) {
-                  id,
-                  name,
-                  price,
-                  image,
-                }
-              }
-            `,
+          mutation: createProduct,
           variables:{
-           name : name ,
-            price : price ,
-            image  : image
+            name : product.name ,
+            price : product.price ,
+            image  : product.image
           }
         }
       )
-      // location.reload();
+      location.reload() ;
     },
   } 
 };
 </script>
+
+<style>
+.wrap_input{
+  display: flex ; 
+  flex-direction: column ; 
+  width: 30%
+}
+</style>
