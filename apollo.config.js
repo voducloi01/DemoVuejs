@@ -4,7 +4,7 @@ module.exports = {
 		service: {
 			name: "DEMO",
 			// URL to the GraphQL API
-			url: "http://localhost:4000/graphql",
+			url: "http://localhost:3001/graphql",
 		},
 		// Files processed by the extension
 		includes: ["src/**/*.vue", "src/**/*.js"],

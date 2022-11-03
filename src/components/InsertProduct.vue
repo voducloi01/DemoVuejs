@@ -15,7 +15,10 @@
                   <label>Hình ảnh</label>
                   <input type="text" name="image" v-model="product.image">
                   
-                  <input v-if="!id" type="button" class="btn btn-success mt-2" @click="createContact(product)" value="Add">
+             
+                    <input  type="button" class="btn btn-success mt-2" @click="createContact(product)" value="Add">
+                    <input  type="button" class="btn btn-success mt-2" @click=" updateProduct(product)" value="Update">
+              
                 </form>
             </section>   
         </div>   
@@ -25,13 +28,15 @@
 <script>
  import {useData} from '../store/useData'
  import {createProduct} from '../graphql/createProduct'
+ import {update_product} from  '../graphql/updateProduct'
 
 export default {
     name: 'VueBootstrapInsertProduct',
   setup () {
     const data  = useData() ; 
-    const product = data.product ;
-  return {product}
+    const product = data.product ;  
+   
+  return {product }
   } ,
   methods: {
     createContact(product){
@@ -42,6 +47,19 @@ export default {
             name : product.name ,
             price : product.price ,
             image  : product.image
+          }
+        }
+      )
+      // location.reload() ;
+    },
+    updateProduct(product){
+      this.$apollo.mutate({
+          mutation: update_product,
+          variables:{
+            id : product.id ,
+            name : product.name ,
+            price : Number(product.price ), 
+            image : product.image    
           }
         }
       )
@@ -57,4 +75,5 @@ export default {
   flex-direction: column ; 
   width: 30%
 }
+
 </style>

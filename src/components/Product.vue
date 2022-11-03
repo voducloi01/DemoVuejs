@@ -2,18 +2,18 @@
     <div class="wrapper">      
         <div  class="container">    
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( product) in products" :key="product.id"> 
+                <div class="col-md-3" v-for=" ( product) in getAllProduct" :key="product.id"> 
                     <div class="card p-4" >   
                         <div class="text-center">  
                             <img :src="product.image" width="200"  height="140px">  
                         </div>   
                         <div class="product-details"> 
-                            <span class="font-weight-bold d-block">{{product.price}}</span>    
+                            <span class="font-weight-bold d-block">{{product.price}}$</span>    
                             <span>{{product.name}}</span>   
                             <div class="buttons d-flex flex-row">   
                                 <div class="cart">                                       
                                 </div> <button class="btn btn-success" @click="() => handleId(product)">  Edit</button>   
-                                <button class="btn btn-success ml-5" @click="() => dataProduct.DeleteId(product.id)">  delete</button>                                                                       
+                                <button class="btn btn-success ml-5" @click="() =>   DeleteId(product.id)">  delete</button>                                                                       
                             </div>   
                         </div>
     
@@ -30,23 +30,36 @@
 </template>
 
 <script>
-
 import InsertProduct from './InsertProduct.vue';
+import {useData} from '../store/useData'
 import { ALL_PRODUCT_QUERY } from '../graphql/allProducts'
+import {deleteProduct} from '../graphql/deleteProduct'
 export default {
     name: "VueBootstrapProduct",
     setup() {
-        const handleId = (a) => {
-            console.log(a);
-        }
+        const data  = useData() ; 
+        const handleId = data.handleId ;
+
         return {handleId}
     },
     components: { InsertProduct }  ,
     apollo: {
-    products: {
+    getAllProduct: {
       query: ALL_PRODUCT_QUERY 
     }
-  }
+  },
+  methods: {
+    DeleteId(id){
+      this.$apollo.mutate({
+          mutation: deleteProduct,
+          variables:{
+            id :id
+          }
+        }
+      )
+      location.reload() ;
+    },
+  } 
  
 };
 </script>

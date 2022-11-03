@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ref, computed, onMounted } from "vue";
-import axios from "axios";
+import { ref, computed } from "vue";
+
 export const useData = defineStore("useData", () => {
 	let ListProduct = ref([]);
 	const product = {
@@ -10,9 +10,12 @@ export const useData = defineStore("useData", () => {
 		image: "",
 	};
 
-	// const handleinsert = async (product) => {
-	// 	ListProduct.value.push();
-	// };
+	const handleId = (Product) => {
+		product.id = Product.id;
+		product.name = Product.name;
+		product.price = Product.price;
+		product.image = Product.image;
+	};
 	const searchText = ref("");
 	const searchProduct = computed(() =>
 		ListProduct.value.filter((e) =>
@@ -20,60 +23,9 @@ export const useData = defineStore("useData", () => {
 		)
 	);
 
-	const getProduct = async () => {
-		try {
-			await axios
-				.get("https://63564d459243cf412f812aea.mockapi.io/products")
-				.then((response) => {
-					ListProduct.value = response.data;
-				});
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
 	const DeleteId = async (id) => {
-		try {
-			await axios.delete(
-				`https://63564d459243cf412f812aea.mockapi.io/products/${id}`
-			);
-			ListProduct.value = ListProduct.value.filter((e) => e.id !== id);
-			alert("Xóa Thành Công !");
-		} catch (error) {
-			console.log(error);
-		}
+		console.log(id);
 	};
-
-	let status = ref(true);
-
-	const handleId = (id) => {
-		const idProduct = ListProduct.value.findIndex((e) => e.id === id);
-		const valueProduct = ListProduct.value[idProduct];
-		product.id = valueProduct.id;
-		product.product = valueProduct.product;
-		product.price = valueProduct.price;
-		product.image = valueProduct.image;
-		status.value = false;
-	};
-	const handleUpdate = async (product) => {
-		try {
-			const respon = await axios.put(
-				`https://63564d459243cf412f812aea.mockapi.io/products/${product.id}`,
-				product
-			);
-			const index = ListProduct.value.findIndex((e) => e.id === product.id);
-			ListProduct.value[index].product = respon.data.product;
-			ListProduct.value[index].price = respon.data.price;
-			ListProduct.value[index].image = respon.data.image;
-			alert("Cập nhập thành công !");
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	onMounted(() => {
-		getProduct();
-	});
 
 	return {
 		ListProduct,
@@ -81,8 +33,6 @@ export const useData = defineStore("useData", () => {
 		searchProduct,
 		searchText,
 		DeleteId,
-		handleUpdate,
 		handleId,
-		status,
 	};
 });
