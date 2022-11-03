@@ -1,70 +1,68 @@
-<template>   
-    <div class="wrapper">      
-        <div  class="container">    
+<template>
+   
+        <div class="container">                
+            <h3>Sản Phẩm Tìm Kiếm</h3>
             <div class="row g-1">   
-                <div class="col-md-3" v-for=" ( product) in getAllProduct" :key="product.id"> 
+                <div class="col-md-3" v-for=" ( products,index) in pageOfItems" :key="index">   
                     <div class="card p-4" >   
                         <div class="text-center">  
-                            <img :src="product.image" width="200"  height="140px">  
-                        </div>   
-                        <div class="product-details"> 
-                            <span class="font-weight-bold d-block">{{product.price}}$</span>    
-                            <span>{{product.name}}</span>   
-                            <div class="buttons d-flex flex-row">   
-                                <div class="cart">                                       
-                                </div> <button class="btn btn-success" @click="() => handleId(product)">  Edit</button>   
-                                <button class="btn btn-success ml-5" @click="() =>   DeleteId(product.id)">  delete</button>                                                                       
-                            </div>   
+                            <img :src="products.image" width="200"  height="140px">  
                         </div>
-    
-                    </div>
-    
-                </div>
-    
-            </div>
-    
+                        <div class="product-details"> 
+                            <span class="font-weight-bold d-block">{{products.price}}</span>    
+                            <span>{{products.product}}</span> 
+                            <br/>
+                            <span>Mã Sản Phẩm {{products.id}}</span> 
+                            <div class="cart">
+                            <button class="btn btn-success ml-5" @click="() => storeCart.handleBuy(products)"> Buy</button>   
+                        </div>
+                        </div>  
+                    </div>  
+                  
+                </div>    
+            </div>   
+            <div class="paginate">
+
+                <jw-pagination :items="exampleItems" @changePage="onChangePage" :pageSize="8"></jw-pagination>
+            </div> 
         </div>
-        <InsertProduct />
-    </div>
-   
+
 </template>
 
 <script>
-import InsertProduct from './InsertProduct.vue';
-import {useData} from '../store/useData'
-import { ALL_PRODUCT_QUERY } from '../graphql/allProducts'
-import {deleteProduct} from '../graphql/deleteProduct'
-export default {
-    name: "VueBootstrapProduct",
-    setup() {
-        const data  = useData() ; 
-        const handleId = data.handleId ;
 
-        return {handleId}
+import {useData} from '../store/useData'
+import { useCart} from '../store/useCart'
+export default {
+    name: 'VueBootstrapProduct',
+    props : ['ListProduct'] ,
+    setup() {
+        
+        const storeSearch = useData()
+        const storeCart = useCart()
+      
+        const exampleItems = [...storeSearch.searchProduct].map(e => ({ product : e.product , price : e.price  , id : e.id , image : e.image}));             
+        return { storeSearch ,storeCart ,exampleItems}   
     },
-    components: { InsertProduct }  ,
-    apollo: {
-    getAllProduct: {
-      query: ALL_PRODUCT_QUERY 
-    }
-  },
-  methods: {
-    DeleteId(id){
-      this.$apollo.mutate({
-          mutation: deleteProduct,
-          variables:{
-            id :id
-          }
+    data() {
+        return {
+            pageOfItems: []
+        };
+    },
+
+    methods: {
+        onChangePage(pageOfItems) {
+            this.pageOfItems = pageOfItems;
         }
-      )
-      location.reload() ;
-    },
-  } 
- 
+    }
 };
 </script>
 
 <style>
+.paginate {
+    text-align: center;
+    margin: 20px 0;
+}
 body {
     background: #eee;
 }
